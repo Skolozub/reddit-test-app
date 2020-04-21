@@ -1,11 +1,17 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { getArticlesData, getRandomArticle, hasExpiredCache } from '../utils';
-import { loadArticles, putArticles, putArticlesError, showArticle } from './articles';
+import {
+  deleteArticle,
+  likeArticle,
+  loadArticles,
+  putArticles,
+  putArticlesError,
+  showArticle } from './articles';
 
 function fetchArticles(subreddit) {
-  return fetch(`https://www.reddit.com/r/${subreddit}.json`)
-    .then(response => response.json());
+  return fetch(`https://www.reddit.com/r/${subreddit}.json`).then(response =>
+    response.json());
 }
 
 function* showRandomArticle(articles) {
@@ -38,9 +44,6 @@ function* workerFetchArticles({ payload: subreddit }) {
         subreddit,
       }));
 
-      const newCachedArticles = yield select(store => store.articles.cached);
-      localStorage.setItem('articlesCache', JSON.stringify(newCachedArticles));
-
       yield call(showRandomArticle, responseData);
     }
   } else {
@@ -48,6 +51,21 @@ function* workerFetchArticles({ payload: subreddit }) {
   }
 }
 
-export function* watcherFetchArticles() {
+function* workerSaveShowedArticles() {
+  const newShowedArticles = yield select(store => store.articles.showed);
+  localStorage.setItem('articlesShowed', JSON.stringify(newShowedArticles));
+}
+
+function* workerSaveCacheArticles() {
+  const newCachedArticles = yield select(store => store.articles.cached);
+  localStorage.setItem('articlesCache', JSON.stringify(newCachedArticles));
+}
+
+export function* watcherArticles() {
   yield takeEvery(loadArticles.type, workerFetchArticles);
+  yield takeEvery(putArticles.type, workerSaveCacheArticles);
+  yield takeEvery(
+    [ showArticle.type, likeArticle.type, deleteArticle.type ],
+    workerSaveShowedArticles,
+  );
 }

@@ -10,9 +10,10 @@ export const likeArticle = createAction('LIKE_ARTICLE');
 export const deleteArticle = createAction('DELETE_ARTICLE');
 
 const articlesCache = localStorage.getItem('articlesCache');
+const showedArticles = localStorage.getItem('articlesShowed');
 
 const initialState = {
-  showed: OrderedMap(),
+  showed: OrderedMap(JSON.parse(showedArticles)) || OrderedMap(),
   cached: JSON.parse(articlesCache) || {},
   status: {
     isLoading: false,
