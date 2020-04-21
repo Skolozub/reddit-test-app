@@ -1,0 +1,20 @@
+.loaderDot {
+  margin: .3rem;
+  background-color: #808080;
+  border-radius: 50%;
+  animation-duration: .8s;
+  animation-iteration-count: infinite;
+  animation-name: anim;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes anim {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .3;
+  }
+}

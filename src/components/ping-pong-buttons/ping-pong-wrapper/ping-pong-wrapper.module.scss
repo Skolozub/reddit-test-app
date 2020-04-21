@@ -1,0 +1,22 @@
+.pingPong {
+  position: relative;
+  animation-iteration-count: infinite;
+  animation-name: pingPongAnimation;
+  animation-timing-function: ease-in-out;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes pingPongAnimation {
+  0%,
+  100% {
+    left: 0;
+  }
+
+  50% {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+}

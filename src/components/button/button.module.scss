@@ -1,0 +1,44 @@
+.button {
+  color: #FFF;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1rem;
+  background-color: #A2A2A2;
+  border: none;
+  border-radius: .25rem;
+  transition: opacity .5s ease;
+  opacity: .5;
+  user-select: none;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:disabled {
+    color: #A2A2A2;
+    background-color: #585858;
+    cursor: not-allowed;
+    opacity: 1;
+  }
+
+  &.small {
+    min-width: 75px;
+    padding: .5rem;
+    font-size: .9rem;
+  }
+
+  &.medium {
+    min-width: 90px;
+    padding: .7rem;
+    font-size: 1.2rem;
+  }
+
+  &.large {
+    min-width: 150px;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+}

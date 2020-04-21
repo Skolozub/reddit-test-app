@@ -1,0 +1,19 @@
+.like {
+  margin: 0 .5rem;
+  transition: all .5s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &.isLiked {
+    & > .heart {
+      fill: #FF6243;
+    }
+  }
+}
+
+.heart {
+  fill: transparent;
+}

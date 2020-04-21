@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  display: inline;
+  overflow: hidden;
+  color: #808080;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.isBefore {
+    margin-left: 1rem;
+  }
+}
